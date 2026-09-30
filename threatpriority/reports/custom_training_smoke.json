@@ -1,0 +1,6 @@
+{
+  "passed": true,
+  "input": "Bundled 300-row synthetic demo reused only as a custom-trainer smoke test",
+  "provenance": "Custom CSV compatibility smoke test; synthetic input",
+  "independent_detection_claim": false
+}

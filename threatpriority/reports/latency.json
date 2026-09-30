@@ -1,0 +1,7 @@
+{
+  "environment": "Linux x86-64; Python 3.12; machine-specific measurements, not guaranteed production latency",
+  "warm_single_event_mean_ms": 40.16479484962474,
+  "warm_single_event_p95_ms": 57.399983999766846,
+  "sample_shap_ms": 54.41794599937566,
+  "replay_rate": "1 event per second"
+}

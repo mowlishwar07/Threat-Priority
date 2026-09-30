@@ -1,0 +1,75 @@
+{
+  "method": "Tree SHAP, interventional, probability space",
+  "base_score": 27.996324196912166,
+  "score": 99.09070558474788,
+  "reconstructed_score": 99.09071208370924,
+  "additivity_error": 6.498961346856902e-06,
+  "features": [
+    {
+      "feature": "unique_dst_ports",
+      "value": 36.0,
+      "contribution_points": 40.542384412416865,
+      "direction": "raises",
+      "imputed": false
+    },
+    {
+      "feature": "dst_bytes",
+      "value": 425.0,
+      "contribution_points": 13.161172580004354,
+      "direction": "raises",
+      "imputed": false
+    },
+    {
+      "feature": "src_bytes",
+      "value": 95.0,
+      "contribution_points": 11.495626256881053,
+      "direction": "raises",
+      "imputed": false
+    },
+    {
+      "feature": "duration",
+      "value": 0.6985,
+      "contribution_points": 9.016254814011404,
+      "direction": "raises",
+      "imputed": false
+    },
+    {
+      "feature": "src_packets",
+      "value": 2.0,
+      "contribution_points": -1.8639735401478674,
+      "direction": "lowers",
+      "imputed": false
+    },
+    {
+      "feature": "failed_logins",
+      "value": 1.0,
+      "contribution_points": -1.4597980050290005,
+      "direction": "lowers",
+      "imputed": false
+    },
+    {
+      "feature": "dst_packets",
+      "value": 6.0,
+      "contribution_points": 0.42342450138299625,
+      "direction": "raises",
+      "imputed": false
+    },
+    {
+      "feature": "protocol",
+      "value": "tcp",
+      "contribution_points": -0.22054845548282742,
+      "direction": "lowers",
+      "imputed": false
+    },
+    {
+      "feature": "service",
+      "value": "http",
+      "contribution_points": -0.00015467723990525428,
+      "direction": "lowers",
+      "imputed": false
+    }
+  ],
+  "summary": "Observed values raising this model score: distinct destination ports = 36.0 (+40.54 points); incoming bytes = 425.0 (+13.16 points); outgoing bytes = 95.0 (+11.50 points).",
+  "latency_ms": 54.41794599937566,
+  "caveat": "Contributions explain the model, not a proven attack cause. Imputed features are assumptions, not observed evidence. Correlated features can share attribution."
+}

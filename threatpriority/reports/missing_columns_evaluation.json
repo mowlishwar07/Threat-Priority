@@ -1,0 +1,35 @@
+{
+  "available": true,
+  "n_events": 1200,
+  "n_attacks": 349,
+  "requested_budget": 20,
+  "effective_budget": 20,
+  "threshold": 0.5,
+  "precision": 0.9,
+  "recall": 0.36103151862464183,
+  "f1": 0.5153374233128835,
+  "fpr": 0.01645123384253819,
+  "average_precision": 0.6783177831118845,
+  "brier_score": 0.15364123671186372,
+  "confusion_matrix": {
+    "tn": 837,
+    "fp": 14,
+    "fn": 223,
+    "tp": 126
+  },
+  "arrival_basis": "timestamp",
+  "ml_queue": {
+    "attacks_found": 20,
+    "precision_at_k": 1.0,
+    "recall_at_k": 0.05730659025787966,
+    "ndcg_at_k": 1.0
+  },
+  "arrival_queue": {
+    "attacks_found": 7,
+    "precision_at_k": 0.35,
+    "recall_at_k": 0.02005730659025788,
+    "ndcg_at_k": 0.46764943040824586
+  },
+  "additional_attacks_at_k": 13,
+  "note": "Labels are evaluation-only; they never enter prediction. Ties preserve file order. Priority is attack likelihood, not measured impact."
+}

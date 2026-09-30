@@ -1,0 +1,5 @@
+-r requirements.txt
+pytest==8.3.5
+matplotlib==3.10.3
+reportlab==4.4.1
+playwright==1.52.0

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ThreatPriority | Analyst workspace</title><link rel="icon" href="/static/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="/static/style.css"><script src="/static/app.js" defer></script></head>
+<body>
+<header><div class="brand"><span class="mark">TP</span><div><strong>ThreatPriority</strong><span class="muted">Real-time cyber threat risk scoring</span></div></div><span class="badge">LOCAL ANALYST WORKSPACE</span></header>
+<main>
+<section class="intro"><div><p class="eyebrow">MLCS-HACK-07 &middot; ML FOR CYBERSECURITY</p><h1>Investigate the right alert first.</h1><p class="sub">A ranked security-event queue, with evidence behind every model score.</p></div><div class="source"><span class="dot"></span><span id="source">Loading model information&hellip;</span><small>Risk = 100 &times; estimated attack probability.<br>Likelihood proxy; not verified incident impact.</small></div></section>
+<div id="notice" role="status" aria-live="polite" hidden></div>
+<section class="metrics" aria-label="Queue summary"><article><span>Active events</span><strong id="total">0</strong><small>Ranked by unrounded score</small></article><article><span>High + critical</span><strong id="high">0</strong><small>Score &ge; 65</small></article><article><span>Unreviewed</span><strong id="unreviewed">0</strong><small>Awaiting analyst decision</small></article><article><span>Missing evidence</span><strong id="incomplete">0</strong><small>Events with imputed features</small></article></section>
+
+<!-- Tabs Navigation (Sleek Segmented Control) -->
+<div style="text-align: center; margin-bottom: 25px;">
+  <div class="tabs-container" style="background: var(--panel); border: 1px solid var(--border); border-radius: 8px; display: inline-flex; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.2);">
+    <span id="tab-btn-queue" style="padding: 10px 30px; font-size: 13px; font-weight: bold; cursor: pointer; color: #08111c; background: var(--cyan); transition: all 0.2s;">Live Alert Queue</span>
+    <span id="tab-btn-model" style="padding: 10px 30px; font-size: 13px; font-weight: bold; cursor: pointer; color: var(--muted); background: transparent; transition: all 0.2s;">Model Details &amp; Evaluation</span>
+  </div>
+</div>
+
+<!-- Tab 1: Queue -->
+<div id="tab-content-queue" class="workspace">
+  <div class="left">
+    <section class="panel"><div class="panel-head"><div><h2>Bring in security events</h2><p>CSV uploads replace the active queue. API events append to it.</p></div><span class="pill">01 / INGEST</span></div>
+    <form id="upload-form"><div class="upload-row"><label class="file-label" for="file">Security-event CSV<input id="file" type="file" accept=".csv,text/csv" required></label><button type="submit" id="upload">Score CSV</button></div><details><summary>Column mapping and supported schema</summary><p>Canonical fields: duration (seconds), src_bytes, dst_bytes, src_packets, dst_packets, failed_logins, unique_dst_ports, protocol, service. At least 3 usable fields per row. Optional: timestamp (ISO or Unix seconds), label (0 benign / 1 attack).</p><p>Aliases: dur, sbytes, dbytes, spkts, dpkts, proto, ts, class. Convert units before uploading. A different dataset needs retraining.</p><label for="mapping">Optional mapping JSON: source header &rarr; canonical field</label><textarea id="mapping" rows="2" placeholder='{"bytes_sent":"src_bytes"}'></textarea></details></form>
+    <div class="actions"><button class="secondary" id="demo">Load synthetic demo</button><button class="secondary" id="stream">Start recorded replay</button><button class="quiet" id="clear">Clear queue</button></div><p class="footnote">Replay sends one bundled synthetic event every second through the ingestion API. It is not a live network capture. No external services are used.</p>
+    <details><summary>Score a single event</summary><form id="manual-form"><label for="manual">JSON event in the documented schema</label><textarea id="manual" rows="5">{"duration": 2, "src_bytes": 8000, "dst_bytes": 300, "src_packets": 80, "dst_packets": 4, "failed_logins": 22, "unique_dst_ports": 2, "protocol": "tcp", "service": "ssh"}</textarea><button class="secondary" type="submit">Add event</button></form></details>
+    </section>
+
+    <section class="panel queue"><div class="panel-head"><div><h2>Alert priority queue</h2><p>Select an event to inspect its evidence.</p></div><a class="secondary link-button" href="/api/export" download>Export CSV</a></div><div class="filters"><label for="severity">Severity<select id="severity"><option value="">All severities</option><option>Critical</option><option>High</option><option>Medium</option><option>Low</option></select></label><label for="search">Search category or status<input id="search" placeholder="e.g. ssh"></label></div><div class="table-wrap"><table><thead><tr><th>Rank</th><th>Event / timestamp</th><th>Risk</th><th>Severity</th><th>Priority</th><th>Evidence</th><th>Status</th></tr></thead><tbody id="events"><tr><td colspan="7" class="empty">Load a CSV or the demo to build your investigation queue.</td></tr></tbody></table></div><div class="pagination"><button class="quiet" id="prev">Previous</button><span id="pages">0 events</span><button class="quiet" id="next">Next</button></div></section>
+  </div>
+  <aside class="panel evidence"><div class="panel-head"><div><h2>Why this score?</h2><p>Genuine SHAP feature contributions</p></div><span class="pill">03 / EXPLAIN</span></div><div id="explanation"><div class="empty-explain"><span class="orb">?</span><h3>Follow the evidence.</h3><p>Select an alert. See what raised the model's suspicion, what lowered it, and what information was missing.</p></div></div></aside>
+</div>
+
+<!-- Tab 2: Model Details (No graph) -->
+<div id="tab-content-model" style="display:none;">
+  <section class="panel" style="max-width: 900px; margin: 0 auto; padding: 30px;">
+    <div class="panel-head" style="margin-bottom: 30px;">
+      <div>
+        <h2 style="font-size:22px; color:var(--cyan);">Model Details &amp; Performance</h2>
+        <p id="model-info" style="color:var(--muted); font-size:14px; margin-top:8px;">Held-out test set performance.</p>
+      </div>
+    </div>
+    
+    <div id="model-metrics" class="metrics" style="grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+      <!-- Populated by JS -->
+    </div>
+  </section>
+</div>
+
+<footer>ThreatPriority &middot; Student research prototype &middot; Analyst decisions remain human.<span>No automatic blocking. Feedback is recorded locally; it does not retrain the model.</span></footer>
+</main></body></html>

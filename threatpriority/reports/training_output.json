@@ -1,0 +1,141 @@
+{
+  "metadata": {
+    "provenance": "Synthetic scenario generator v2; not captured traffic",
+    "model": "Random Forest",
+    "score_definition": "100 x model estimated attack probability (uncalibrated proxy)",
+    "feature_schema": [
+      "duration",
+      "src_bytes",
+      "dst_bytes",
+      "src_packets",
+      "dst_packets",
+      "failed_logins",
+      "unique_dst_ports",
+      "protocol",
+      "service"
+    ],
+    "split": "60/20/20 stratified random, duplicate feature rows removed",
+    "threshold": 0.5,
+    "training_rows": 3600,
+    "validation_rows": 1200,
+    "test_rows": 1200,
+    "duplicates_removed": 0,
+    "library_versions": {
+      "scikit-learn": "1.6.1",
+      "shap": "0.48.0"
+    },
+    "selection": "Random Forest chosen for native Tree SHAP; Logistic Regression is a validation baseline."
+  },
+  "validation_comparison": {
+    "Random Forest": {
+      "available": true,
+      "n_events": 1200,
+      "n_attacks": 349,
+      "requested_budget": 20,
+      "effective_budget": 20,
+      "threshold": 0.5,
+      "precision": 0.876,
+      "recall": 0.6275071633237822,
+      "f1": 0.7312186978297162,
+      "fpr": 0.036427732079905996,
+      "average_precision": 0.8274836254421317,
+      "brier_score": 0.10780634041862702,
+      "confusion_matrix": {
+        "tn": 820,
+        "fp": 31,
+        "fn": 130,
+        "tp": 219
+      },
+      "arrival_basis": "timestamp",
+      "ml_queue": {
+        "attacks_found": 20,
+        "precision_at_k": 1.0,
+        "recall_at_k": 0.05730659025787966,
+        "ndcg_at_k": 1.0
+      },
+      "arrival_queue": {
+        "attacks_found": 6,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.017191977077363897,
+        "ndcg_at_k": 0.3128294821619043
+      },
+      "additional_attacks_at_k": 14,
+      "note": "Labels are evaluation-only; they never enter prediction. Ties preserve file order. Priority is attack likelihood, not measured impact."
+    },
+    "Logistic Regression": {
+      "available": true,
+      "n_events": 1200,
+      "n_attacks": 349,
+      "requested_budget": 20,
+      "effective_budget": 20,
+      "threshold": 0.5,
+      "precision": 0.847457627118644,
+      "recall": 0.4297994269340974,
+      "f1": 0.5703422053231939,
+      "fpr": 0.03172737955346651,
+      "average_precision": 0.693103736945976,
+      "brier_score": 0.14524524599200503,
+      "confusion_matrix": {
+        "tn": 824,
+        "fp": 27,
+        "fn": 199,
+        "tp": 150
+      },
+      "arrival_basis": "timestamp",
+      "ml_queue": {
+        "attacks_found": 19,
+        "precision_at_k": 0.95,
+        "recall_at_k": 0.054441260744985676,
+        "ndcg_at_k": 0.945051411928014
+      },
+      "arrival_queue": {
+        "attacks_found": 6,
+        "precision_at_k": 0.3,
+        "recall_at_k": 0.017191977077363897,
+        "ndcg_at_k": 0.3128294821619043
+      },
+      "additional_attacks_at_k": 13,
+      "note": "Labels are evaluation-only; they never enter prediction. Ties preserve file order. Priority is attack likelihood, not measured impact."
+    }
+  },
+  "test": {
+    "available": true,
+    "n_events": 1200,
+    "n_attacks": 349,
+    "requested_budget": 20,
+    "effective_budget": 20,
+    "threshold": 0.5,
+    "precision": 0.9008264462809917,
+    "recall": 0.6246418338108882,
+    "f1": 0.7377326565143824,
+    "fpr": 0.0282021151586369,
+    "average_precision": 0.840052853335869,
+    "brier_score": 0.10656115570109807,
+    "confusion_matrix": {
+      "tn": 827,
+      "fp": 24,
+      "fn": 131,
+      "tp": 218
+    },
+    "arrival_basis": "timestamp",
+    "ml_queue": {
+      "attacks_found": 20,
+      "precision_at_k": 1.0,
+      "recall_at_k": 0.05730659025787966,
+      "ndcg_at_k": 1.0
+    },
+    "arrival_queue": {
+      "attacks_found": 7,
+      "precision_at_k": 0.35,
+      "recall_at_k": 0.02005730659025788,
+      "ndcg_at_k": 0.46764943040824586
+    },
+    "additional_attacks_at_k": 13,
+    "note": "Labels are evaluation-only; they never enter prediction. Ties preserve file order. Priority is attack likelihood, not measured impact."
+  },
+  "batch_scoring_ms": 49.37150399928214,
+  "mean_batch_ms_per_event": 0.041142919999401784,
+  "input_warnings": [
+    "Ignored columns: scenario"
+  ]
+}

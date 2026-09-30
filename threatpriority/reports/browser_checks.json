@@ -1,0 +1,18 @@
+{
+  "passed": [
+    "Demo queue and ranking evaluation displayed",
+    "Nine genuine SHAP feature contributions rendered",
+    "Feedback updates review state",
+    "Custom investigation budget evaluated",
+    "Missing-column upload and imputation warning explained",
+    "Unlabeled file scored without fabricated evaluation",
+    "Queue search and pagination",
+    "Ranked CSV export",
+    "Recorded replay start, event ingestion, and stop",
+    "Externally posted API event appears through automatic refresh",
+    "390-pixel layout has no page overflow",
+    "200% root font size has no page overflow",
+    "No JavaScript page errors"
+  ],
+  "page_errors": []
+}
